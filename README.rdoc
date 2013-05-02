@@ -16,3 +16,7 @@ This plugin allows to "news notification" to the top bar of the pages.
     rake redmine:plugins:migrate NAME=plugin_name VERSION=0 RAILS_ENV=production
 2. Remove "redmine_news_notification" directory from the plugins directory: #{RAILS_ROOT}/plugins
 3. Restart Redmine
+
+== Screenshots
+http://cdn-ak.f.st-hatena.com/images/fotolife/g/georz/20130502/20130502155504.png
+http://cdn-ak.f.st-hatena.com/images/fotolife/g/georz/20130502/20130502155505.png
