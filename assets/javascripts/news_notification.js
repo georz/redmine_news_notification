@@ -1,5 +1,15 @@
-(function() {
+(function () {
     var cnt = news.length;
+    var lang = document.documentElement.lang;
+    var dict = {};
+    dict["en"] = {
+        nodata: 'No unread news',
+        view_all: 'View all news'
+    };
+    dict["de"] = {
+        nodata: 'Keine ungelesenen Mitteilungen',
+        view_all: 'Alle Mitteilungen ansehen'
+    };
 
     var classes = new Array();
     classes['nn_badge_bgc'] = 'nn_badge_bgc';
@@ -14,7 +24,7 @@
         classes['nn_badge_bgc'] = '';
         classes['nn_badge_cnt'] = '';
 
-        for (var i = 0; i < news.length; i ++) {
+        for (var i = 0; i < news.length; i++) {
             nn_list += '<li><a href="/news/' + news[i][0] + '">';
             nn_list += '<div class="nn_prtl">' + news[i][5] + ': ' + news[i][1] + '</div>';
             nn_list += '<div class="summary">' + news[i][2] + '</div>';
@@ -22,17 +32,17 @@
             nn_list += '</a></li>';
         }
     } else {
-        nn_list += '<li><a class="nn_none">No unread news.</a></li>';
+        nn_list += '<li><a class="nn_none"> ' + dict[lang]['nodata'] + ' </a></li>';
     }
     nn_list += '</ul>';
 
     var nn = document.querySelector('.nn');
     nn.innerHTML = '<span id="nn_badge"><span id="nn_badge_bgc" class="' + classes['nn_badge_bgc'] + '"></span><span id="nn_badge_cnt" class="' + classes['nn_badge_cnt'] + '">' + cnt + '</span></span>';
-    nn.insertAdjacentHTML('afterend', '<div id="nn_list_box" style="visibility: hidden;"><div id="nn_header"><a href="/news">View all news</a></div><div id="nn_list">' + nn_list + '</div></div>');
+    nn.insertAdjacentHTML('afterend', '<div id="nn_list_box" style="visibility: hidden;"><div id="nn_header"><a href="/news">' + dict[lang]['view_all'] + '</a></div><div id="nn_list">' + nn_list + '</div></div>');
 
     var nn_list_box = document.getElementById('nn_list_box');
 
-    nn.addEventListener('click', function(e) {
+    nn.addEventListener('click', function (e) {
         e.preventDefault();
         if (nn_list_box.style.visibility === 'hidden') {
             nn_list_box.style.visibility = 'visible';
