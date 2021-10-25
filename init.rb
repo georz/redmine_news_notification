@@ -25,7 +25,7 @@ Redmine::Plugin.register :redmine_news_notification do
   name 'Redmine News Notification plugin'
   author 'George Harada'
   description 'This is a News Notification plugin for Redmine'
-  version '1.0.0'
+  version '1.0.1'
   # url 'http://example.com/path/to/plugin'
   # author_url 'https://twitter.com/georz'
 
