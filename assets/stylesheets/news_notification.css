@@ -97,7 +97,7 @@
 }
 
 #nn_header a {
-    color: #36c !important;
+    color: #36c;
     font-size: 1.2em !important;
 }
 #nn_header a:hover, #nn_header a:active {
