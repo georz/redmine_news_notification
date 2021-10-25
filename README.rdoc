@@ -3,7 +3,7 @@
 This plugin allows to "news notification" to the top bar of the pages.
 
 == Requirements
-* Redmine 2.x
+* Redmine 4.x
 
 == Installation 
 1. Copy "redmine_news_notification" directory into #{RAILS_ROOT}/plugins

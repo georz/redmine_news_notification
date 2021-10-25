@@ -15,3 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 * Rubycop offenses
+
+## 0.0.1 - 2012-05-02
+
+* Initial commit
