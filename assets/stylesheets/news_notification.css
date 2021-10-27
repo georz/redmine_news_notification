@@ -7,7 +7,7 @@
 
 #nn_badge_bgc {
     display: block;
-    height: 12px;
+    height: 15px;
     width: 22px;
     background-color: #d14836;
     background-image: -webkit-gradient(linear,left top,left bottom,from(#dd4b39),to(#d14836));
@@ -97,7 +97,7 @@
 }
 
 #nn_header a {
-    color: #36c !important;
+    color: #36c;
     font-size: 1.2em !important;
 }
 #nn_header a:hover, #nn_header a:active {

@@ -19,17 +19,38 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA
 
-class CreateNewsNotifications < ActiveRecord::Migration[4.2]
-  def self.up
-    create_table :news_notifications, { id: false } do |t|
-      t.integer :user_id, null: false
-      t.integer :news_id, null: false
-      t.datetime :read_on, null: false
-    end
-    add_index :news_notifications, %i[user_id news_id], unique: true
-  end
+module RedmineNewsNotification
+  module Patches
+    module NewsControllerPatch
+      def self.prepended(base)
+        base.send(:prepend, InstanceMethods)
+      end
 
-  def self.down
-    drop_table :news_notifications
+      module InstanceMethods
+        def show
+          current_user_id = User.current.id
+          read_check = NewsNotification.where(
+            user_id: current_user_id,
+            news_id: @news.id
+          ).take
+
+          if read_check.nil?
+            NewsNotification.create(
+              user_id: current_user_id,
+              news_id: @news.id,
+              read_on: Time.now.to_s(:db)
+            )
+          end
+          super
+        end
+      end
+    end
+  end
+end
+
+# Apply patch
+Rails.configuration.to_prepare do
+  unless NewsController.included_modules.include?(RedmineNewsNotification::Patches::NewsControllerPatch)
+    NewsController.prepend(RedmineNewsNotification::Patches::NewsControllerPatch)
   end
 end

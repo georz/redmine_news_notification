@@ -19,17 +19,13 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA
 
-class CreateNewsNotifications < ActiveRecord::Migration[4.2]
-  def self.up
-    create_table :news_notifications, { id: false } do |t|
-      t.integer :user_id, null: false
-      t.integer :news_id, null: false
-      t.datetime :read_on, null: false
-    end
-    add_index :news_notifications, %i[user_id news_id], unique: true
-  end
+# Plugin Libraries
+lib_dir = File.join(File.dirname(__FILE__), 'redmine_news_notification')
 
-  def self.down
-    drop_table :news_notifications
+lib_subdirs = %w[hooks patches]
+
+lib_subdirs.each do |subdir|
+  Dir.glob(File.join(lib_dir, subdir, '**', '*.rb')).sort.each do |file|
+    require file
   end
 end
